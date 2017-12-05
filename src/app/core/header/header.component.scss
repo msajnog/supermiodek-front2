@@ -1,0 +1,15 @@
+nav {
+  padding: 0;
+  .navbar-collapse {
+    flex-grow: unset;
+
+    ul {
+      li {
+        a {
+          line-height: 70px;
+          padding: 0 20px;
+        }
+      }
+    }
+  }
+}
