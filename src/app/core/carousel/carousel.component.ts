@@ -25,12 +25,13 @@ import { CarouselItemInterface } from './carousel.interface';
         style({
           opacity: 0,
         }),
-        animate('0.7s 0.6s ease-in')
+        animate('0.7s ease-in')
       ]),
     ])
   ]
 })
 export class CarouselComponent implements OnInit {
+  interval;
   items: CarouselItemInterface[] = [
     {
       url: 'assets/images/slide01.jpg',
@@ -49,9 +50,7 @@ export class CarouselComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    setInterval(() => {
-      this.slide('next');
-    }, 5000);
+    this.startSliding();
   }
 
   slide (direction) {
@@ -69,5 +68,14 @@ export class CarouselComponent implements OnInit {
 
     this.items[activeIndex].state = 'hidden';
     this.items[newIndex].state = 'active';
+    clearInterval(this.interval);
+    this.startSliding();
+  }
+
+  startSliding () {
+    this.interval =
+      setInterval(() => {
+        this.slide('next');
+      }, 5000);
   }
 }
