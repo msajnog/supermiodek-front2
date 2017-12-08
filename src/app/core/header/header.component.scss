@@ -1,5 +1,8 @@
-nav {
+@import "../../../styles/_helpers";
+
+nav.nav-custom-class {
   padding: 0;
+
   .navbar-collapse {
     flex-grow: unset;
 
@@ -8,6 +11,14 @@ nav {
         a {
           line-height: 70px;
           padding: 0 20px;
+          font-size: 2.4rem;
+          color: #fff;
+          text-transform: uppercase;
+          @extend .transition;
+
+          &:hover {
+            color: #222222;
+          }
         }
       }
     }

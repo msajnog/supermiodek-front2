@@ -1,0 +1,13 @@
+@import "variables";
+
+html {
+  font-family: $font-family-base;
+  font-size: 10px;
+
+  body {
+    a {
+      font-family: $font-family-secondary;
+    }
+  }
+}
+

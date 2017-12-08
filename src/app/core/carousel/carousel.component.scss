@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  .app-carousel-item {
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &:first-of-type {
+      position: relative;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    font-size: 5rem;
+    transform: translateY(-50%);
+    color: #fff;
+    opacity: 0.7;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.left {
+      left: 4rem;
+    }
+
+    &.right {
+      right: 4rem;
+    }
+  }
+}

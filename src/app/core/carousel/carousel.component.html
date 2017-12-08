@@ -1,0 +1,8 @@
+<div class="app-carousel-item"
+     *ngFor="let item of items"
+     [@slideState]="item.state"
+>
+  <img [src]="item.url">
+</div>
+<fa name="chevron-left" class="arrow left" (click)="slide('prev')"></fa>
+<fa name="chevron-right" class="arrow right" (click)="slide('next')"></fa>
