@@ -1,0 +1,51 @@
+@import "../../../styles/variables";
+@import "../../../styles/helpers";
+
+:host {
+  margin-bottom: 30px;
+  //padding-bottom: $grid-gutter-width / 2;
+  border: 1px solid transparent;
+  @extend .transition;
+
+  &:hover {
+    border-color: $yellow;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(205, 182, 34, 0.8);
+  }
+
+  a.img {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    @extend .transition;
+
+    &:hover {
+      border-color: $red-main;
+    }
+  }
+
+  a.name {
+    display: block;
+    font-size: 2.2rem;
+    margin: 10px 0 5px 0;
+  }
+
+  .short-desc {
+    font-size: 1.2rem;
+    color: $grey;
+  }
+
+  .price {
+    float: left;
+    line-height: 40px;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  .quantity {
+    float: right;
+  }
+}
+
+.place-order {
+  margin-top: 30px;
+}

@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    CarouselComponent
+    CarouselComponent,
+    ProductComponent
   ],
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
   ],
   exports: [
     HeaderComponent,
-    CarouselComponent
+    CarouselComponent,
+    ProductComponent
   ]
 })
 export class CoreModule { }

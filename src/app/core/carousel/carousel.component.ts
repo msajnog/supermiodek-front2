@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { animate, trigger, state, style, transition } from '@angular/animations';
+import { Observable } from 'rxjs/Observable';
 
 import { CarouselItemInterface } from './carousel.interface';
 
@@ -68,14 +69,11 @@ export class CarouselComponent implements OnInit {
 
     this.items[activeIndex].state = 'hidden';
     this.items[newIndex].state = 'active';
-    clearInterval(this.interval);
+    this.interval.unsubscribe();
     this.startSliding();
   }
 
   startSliding () {
-    this.interval =
-      setInterval(() => {
-        this.slide('next');
-      }, 5000);
+    this.interval = Observable.interval(5000).subscribe(() => { this.slide('next'); });
   }
 }

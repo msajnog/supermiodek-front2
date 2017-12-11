@@ -1,3 +1,119 @@
-<p>
-  home works!
-</p>
+<section class="welcome bg-beige-main">
+  <div class="container">
+    <h1>Nagłówek</h1>
+    <div class="row">
+      <div class="col-12 col-sm-4 section-item">
+        <img src="assets/images/img01.jpg" alt="" />
+        <h2 class="title">Vestibulum moles</h2>
+        <div class="desc">
+          Lorem ipsum dolor sit amet, coectetuer adipiscing elit. Praesent vestibulum moleus. Aenean nonummy hendrerit mauris. Phasellus portce suscipit.
+        </div>
+      </div>
+      <div class="col-12 col-sm-4 section-item">
+        <img src="assets/images/img02.jpg" alt="" />
+        <h2 class="title">Vestibulum moles</h2>
+        <div class="desc">
+          Lorem ipsum dolor sit amet, coectetuer adipiscing elit. Praesent vestibulum moleus. Aenean nonummy hendrerit mauris. Phasellus portce suscipit.
+        </div>
+      </div>
+      <div class="col-12 col-sm-4 section-item">
+        <img src="assets/images/img03.jpg" alt="" />
+        <h2 class="title">Vestibulum moles</h2>
+        <div class="desc">
+          Lorem ipsum dolor sit amet, coectetuer adipiscing elit. Praesent vestibulum moleus. Aenean nonummy hendrerit mauris. Phasellus portce suscipit.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="description no-padding right-image">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <img src="assets/images/page-1_img12.jpg" alt="" />
+      </div>
+      <div class="col-xs-12 col-sm-6 text">
+        <h3>NASCETUR RIDICULUS MUS NULLA DUI FUSCE FEUGIAT MALESUADA ODIO MORBI</h3>
+        <p>
+          Lorem ipsum dolor sit amet, coectetuer adipiscing elit. Praesent vbulum moleus. Aenean nonummy hendrerit mauris. Phasellus portce s varius mi. m sociis natoque penatibus et magnis diurient montes, nascetur ridiculus mus. Nulla dui. Fuscgiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac. Duis ultricies pharetra magnamsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris
+        </p>
+        <a href="#" class="btn btn-secondary">Czytaj więcej</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="description bg-beige-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <img src="assets/images/page-1_img11.jpg" alt="" />
+      </div>
+      <div class="col-xs-12 col-sm-8 text no-padding">
+        <h3>vestibulum molestie lacus. Aenean nony hendrerit mauris. Phasellus porta. Fusce suscipit vari</h3>
+        <p>
+          Lorem ipsum dolor sit amet, coectetuer adipiscing elit. Praesent vbulum moleus. Aenean nonummy hendrerit mauris. Phasellus portce s varius mi. m sociis natoque penatibus et magnis diurient montes, nascetur ridiculus mus. Nulla dui. Fuscgiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac. Duis ultricies pharetra magnamsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris
+        </p>
+        <a href="#" class="btn btn-secondary">Czytaj więcej</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="products">
+  <h4>Produkty</h4>
+  <div class="container products-list">
+    <div class="row justify-content-center">
+      <app-product class="col-xs-12 col-sm-6 col-md-3 product-item"
+                   *ngFor="let product of products"
+                   [product]="product">
+      </app-product>
+    </div>
+  </div>
+  <a href="#" class="btn btn-primary place-order">Złóż zamówienie</a>
+</section>
+
+<section class="news bg-beige-main">
+  <h4>News & events</h4>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-4">
+        <time>12/09/2015</time>
+        <h5>Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus</h5>
+        <p>
+          Lorem ipsum dolor sit amet, coectetuer adipiscing elit. Praesent vestibulum moleus. Aenean nonummy hendrerit mauris. Phasellus portce s varius mi. Cum sociis natoque penatibus et magnis diurient montes, nascetur ridiculus mus. Nulla dui. Fuscgiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac. Duis ultricies pharetra magnamsan malesuada orci.
+        </p>
+        <a href="#" class="btn btn-primary">Czytaj więcej</a>
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <time>12/09/2015</time>
+        <h5>Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus</h5>
+        <p>
+          Lorem ipsum dolor sit amet, coectetuer adipiscing elit. Praesent vestibulum moleus. Aenean nonummy hendrerit mauris. Phasellus portce s varius mi. Cum sociis natoque penatibus et magnis diurient montes, nascetur ridiculus mus. Nulla dui. Fuscgiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac. Duis ultricies pharetra magnamsan malesuada orci.
+        </p>
+        <a href="#" class="btn btn-primary">Czytaj więcej</a>
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <time>12/09/2015</time>
+        <h5>Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus</h5>
+        <p>
+          Lorem ipsum dolor sit amet, coectetuer adipiscing elit. Praesent vestibulum moleus. Aenean nonummy hendrerit mauris. Phasellus portce s varius mi. Cum sociis natoque penatibus et magnis diurient montes, nascetur ridiculus mus. Nulla dui. Fuscgiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac. Duis ultricies pharetra magnamsan malesuada orci.
+        </p>
+        <a href="#" class="btn btn-primary">Czytaj więcej</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery">
+  <h4>Galeria</h4>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-xm-6 col-md-3 img" *ngFor="let photo of gallery">
+        <img [src]="photo.thumbnailUrl" alt="" />
+      </div>
+    </div>
+  </div>
+</section>
+

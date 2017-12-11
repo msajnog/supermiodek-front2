@@ -11,3 +11,42 @@ html {
   }
 }
 
+img {
+  max-width: 100%;
+}
+
+
+
+.btn {
+  color: #fff;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  padding: 20px 30px;
+  @extend .transition;
+  border-radius: 0;
+  border: 0;
+
+  &:hover, &:active {
+    color: #fff;
+  }
+
+  &.btn-primary {
+    background: $red-main;
+    &:hover {
+      background: $blue;
+    }
+  }
+
+  &.btn-secondary {
+    background: $blue;
+    border-color: transparent;
+    &:hover {
+      background: $red-main;
+    }
+  }
+
+  &.btn-small {
+    font-size: 1.4rem;
+    padding: 10px 15px;
+  }
+}
