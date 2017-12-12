@@ -1,5 +1,8 @@
 @import "../../styles/variables";
 @import "../../styles/helpers";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
 
 h1, h4 {
   font-family: $font-family-secondary;
@@ -98,44 +101,50 @@ section {
   }
 
   &.news {
-    font-family: $font-family-secondary;
-    time {
-      font-weight: 300;
-      font-size: 4.8rem;
-      color: $blue;
-    }
+    .news-item {
+      font-family: $font-family-secondary;
+      margin-bottom: 20px;
 
-    h5 {
-      font-size: 1.6rem;
-      color: $blue;
-      font-weight: 900;
-      text-transform: uppercase;
-      line-height: 21px;
-    }
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 0;
+      }
 
-    p {
-      font-size: 1.6rem;
-      color: $brown;
-      line-height: 21px;
-      margin: 10px 0 50px 0;
+      time {
+        font-weight: 300;
+        font-size: 4.8rem;
+        color: $blue;
+      }
 
+      h5 {
+        font-size: 1.6rem;
+        color: $blue;
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 21px;
+      }
+
+      p {
+        font-size: 1.6rem;
+        color: $brown;
+        line-height: 21px;
+        margin: 10px 0 50px 0;
+
+      }
     }
   }
 
-
-
-  .gallery {
+  &.gallery {
     .img {
       position: relative;
       margin: 15px 0;
       overflow: hidden;
+      cursor: pointer;
 
       img {
         @extend .transition;
       }
 
       &:after {
-        display: none;
         content: '';
         position: absolute;
         top: 0;
@@ -143,29 +152,33 @@ section {
         width: 100%;
         height: 100%;
         background: $blue;
-        opacity: 0.5;
+        opacity: 0;
         @extend .transition;
       }
 
       &:before {
-        display: none;
-        content: "\f00e";
+        content: '\f00e';
         position: absolute;
         top: 50%;
         left: 0;
         right: 0;
-        font-family: 'FontAwesome';
+        font-family: $font-family-font-awesome;
         font-size: 5.0rem;
         text-align: center;
         color: #fff;
         z-index: 1;
+        opacity: 0;
         transform: translateY(-50%);
         @extend .transition;
       }
 
       &:hover {
-        &:before, &:after {
-          display: block;
+        &:before {
+          opacity: 1;
+        }
+
+        &:after {
+          opacity: 0.5;
         }
 
         img {

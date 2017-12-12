@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { Product } from '../core/product/product.interface';
+import { Photo } from './home.interface';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  closeResult: string;
   products: Product[] = [
     {
       name: 'first product',
@@ -28,7 +32,7 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  gallery: any[] = [
+  gallery: Photo[] = [
     {
       thumbnailUrl: 'assets/images/gallery_img_thumb1.jpg',
       photoUrl: 'assets/images/gallery_img1.jpg'
@@ -55,9 +59,14 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  modalPhoto: Photo;
 
-  ngOnInit() {
+  constructor(private modalService: NgbModal) { }
+
+  ngOnInit() {}
+
+  open(content, photo: Photo) {
+    this.modalPhoto = photo;
+    this.modalService.open(content);
   }
-
 }

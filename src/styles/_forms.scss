@@ -1,0 +1,100 @@
+@import "variables";
+
+label.form-control-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  em {
+    color: $red-main;
+    font-style: normal;
+  }
+}
+
+.form-control {
+  height: $input-height;
+  line-height: $input-height;
+  border-radius: 0;
+  border-color: $grey;
+  box-shadow: none;
+
+  &:focus {
+    border-color: $yellow;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(205, 182, 34, 0.8);
+  }
+}
+.quantity {
+  font-size: 0;
+
+  button {
+    display: inline-block;
+    top: 0;
+    height: $input-height;
+    font-size: 1.8rem;
+    color: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0;
+    vertical-align: top;
+    background: $red-main;
+    @extend .transition;
+
+    &:hover {
+      background: $blue;
+    }
+  }
+
+  input {
+    display: inline-block;
+    width: 50px;
+    font-size: 1.6rem;
+    text-align: center;
+    border-left: 0;
+    border-right: 0;
+    border-color: $red-main;
+
+    &:focus {
+      border-color: $red-main;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(244, 66, 54, 0.8);
+    }
+  }
+
+  input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+textarea.form-control {
+  min-height: 100px;
+  line-height: 20px;
+  resize: vertical;
+}
+
+.custom-control {
+  &.custom-checkbox {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    .custom-control-indicator {
+      top: 0;
+      width: 2rem;
+      height: 2rem;
+      background-color: #bdbdbd;
+      border-radius: 0;
+    }
+
+    .custom-control-input:checked ~ .custom-control-indicator {
+      background-color: $blue;
+    }
+
+    .custom-control-description {
+      font-size: 1.4rem;
+      margin-left: 10px;
+    }
+  }
+}

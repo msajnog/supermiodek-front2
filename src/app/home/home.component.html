@@ -78,7 +78,7 @@
   <h4>News & events</h4>
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-md-4">
+      <div class="col-xs-12 col-lg-4 news-item">
         <time>12/09/2015</time>
         <h5>Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus</h5>
         <p>
@@ -86,7 +86,7 @@
         </p>
         <a href="#" class="btn btn-primary">Czytaj więcej</a>
       </div>
-      <div class="col-xs-12 col-md-4">
+      <div class="col-xs-12 col-lg-4 news-item">
         <time>12/09/2015</time>
         <h5>Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus</h5>
         <p>
@@ -94,7 +94,7 @@
         </p>
         <a href="#" class="btn btn-primary">Czytaj więcej</a>
       </div>
-      <div class="col-xs-12 col-md-4">
+      <div class="col-xs-12 col-lg-4 news-item">
         <time>12/09/2015</time>
         <h5>Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus</h5>
         <p>
@@ -110,10 +110,19 @@
   <h4>Galeria</h4>
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-xm-6 col-md-3 img" *ngFor="let photo of gallery">
-        <img [src]="photo.thumbnailUrl" alt="" />
+      <div class="col-xs-12 col-xm-6 col-md-4" *ngFor="let photo of gallery">
+        <div class="img" (click)="open(content, photo)">
+          <img [src]="photo.thumbnailUrl" alt="" />
+        </div>
       </div>
     </div>
   </div>
+
+  <ng-template #content let-close="close">
+    <fa name="times" size="3x" class="cross-close" (click)="close()"></fa>
+    <div class="modal-body">
+      <img [src]="modalPhoto.photoUrl" alt="">
+    </div>
+  </ng-template>
 </section>
 

@@ -1,0 +1,95 @@
+<footer class="bg-beige-main">
+  <div class="container">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-12 col-md-offset-0">
+          <h4>Kontakt</h4>
+          <div class="row">
+            <div class="col-xs-12 col-md-4">
+              <div class="form-group">
+                <label for="contactName" class="form-control-label">Imię i nazwisko<em>*</em></label>
+                <input
+                  type="text"
+                  name="contactName"
+                  id="contactName"
+                  formControlName="contactName"
+                  class="form-control form-control-success"
+                  [ngClass]="{'is-valid' : contactForm.get('contactName').valid && contactForm.get('contactName').touched, 'is-invalid' : contactForm.get('contactName').invalid && contactForm.get('contactName').touched}"
+                  required
+                >
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+              <div class="form-group has-feedback">
+                <label for="contactEmail" class="form-control-label">Adres e-mail<em>*</em></label>
+                <input
+                  type="email"
+                  name="contactEmail"
+                  id="contactEmail"
+                  formControlName="contactEmail"
+                  [ngClass]="{'is-valid' : contactForm.get('contactEmail').valid && contactForm.get('contactEmail').touched, 'is-invalid' : contactForm.get('contactEmail').invalid && contactForm.get('contactEmail').touched}"
+                  class="form-control"
+                  required
+                >
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+              <div class="form-group has-feedback">
+                <label for="contactPhone" class="form-control-label">Numer telefonu</label>
+                <input
+                  type="tel"
+                  name="contactPhone"
+                  id="contactPhone"
+                  formControlName="contactPhone"
+                  [ngClass]="{'is-valid' : contactForm.get('contactPhone').valid && contactForm.get('contactPhone').touched, 'is-invalid' : contactForm.get('contactPhone').invalid && contactForm.get('contactPhone').touched}"
+                  class="form-control"
+                >
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group has-feedback">
+                <label for="contactSubject" class="form-control-label">Temat<em>*</em></label>
+                <input
+                  type="text"
+                  name="contactSubject"
+                  id="contactSubject"
+                  formControlName="contactSubject"
+                  [ngClass]="{'is-valid' : contactForm.get('contactSubject').valid && contactForm.get('contactSubject').touched, 'is-invalid' : contactForm.get('contactSubject').invalid && contactForm.get('contactSubject').touched}"
+                  class="form-control"
+                  required
+                >
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group has-feedback">
+                <label for="contactContent" class="form-control-label">Treść<em>*</em></label>
+                <textarea
+                  name="contactContent"
+                  id="contactContent"
+                  formControlName="contactContent"
+                  [ngClass]="{'is-valid' : contactForm.get('contactContent').valid && contactForm.get('contactContent').touched, 'is-invalid' : contactForm.get('contactContent').invalid && contactForm.get('contactContent').touched}"
+                  class="form-control"
+                  required
+                >
+                </textarea>
+              </div>
+              <div class="checkbox">
+                <label class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    formControlName="sendCopy"
+                  >
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">Wyślij kopię na mój adres</span>
+                </label>
+              </div>
+              <button type="submit" class="btn btn-secondary" [disabled]="!contactForm.valid">Wyślij</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</footer>

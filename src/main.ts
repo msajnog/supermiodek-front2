@@ -6,6 +6,8 @@ import { environment } from './environments/environment';
 
 import 'rxjs/add/observable/interval';
 
+import 'rxjs/add/operator/switchMap';
+
 if (environment.production) {
   enableProdMode();
 }
