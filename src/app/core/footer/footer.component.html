@@ -12,9 +12,9 @@
                   type="text"
                   name="contactName"
                   id="contactName"
-                  formControlName="contactName"
+                  formControlName="name"
+                  [ngClass]="{'is-valid' : contactForm.get('name').valid && contactForm.get('name').touched, 'is-invalid' : contactForm.get('name').invalid && contactForm.get('name').touched}"
                   class="form-control form-control-success"
-                  [ngClass]="{'is-valid' : contactForm.get('contactName').valid && contactForm.get('contactName').touched, 'is-invalid' : contactForm.get('contactName').invalid && contactForm.get('contactName').touched}"
                   required
                 >
               </div>
@@ -26,8 +26,8 @@
                   type="email"
                   name="contactEmail"
                   id="contactEmail"
-                  formControlName="contactEmail"
-                  [ngClass]="{'is-valid' : contactForm.get('contactEmail').valid && contactForm.get('contactEmail').touched, 'is-invalid' : contactForm.get('contactEmail').invalid && contactForm.get('contactEmail').touched}"
+                  formControlName="email"
+                  [ngClass]="{'is-valid' : contactForm.get('email').valid && contactForm.get('email').touched, 'is-invalid' : contactForm.get('email').invalid && contactForm.get('email').touched}"
                   class="form-control"
                   required
                 >
@@ -40,8 +40,8 @@
                   type="tel"
                   name="contactPhone"
                   id="contactPhone"
-                  formControlName="contactPhone"
-                  [ngClass]="{'is-valid' : contactForm.get('contactPhone').valid && contactForm.get('contactPhone').touched, 'is-invalid' : contactForm.get('contactPhone').invalid && contactForm.get('contactPhone').touched}"
+                  formControlName="phone"
+                  [ngClass]="{'is-valid' : contactForm.get('phone').valid && contactForm.get('phone').touched, 'is-invalid' : contactForm.get('phone').invalid && contactForm.get('phone').touched}"
                   class="form-control"
                 >
               </div>
@@ -53,8 +53,8 @@
                   type="text"
                   name="contactSubject"
                   id="contactSubject"
-                  formControlName="contactSubject"
-                  [ngClass]="{'is-valid' : contactForm.get('contactSubject').valid && contactForm.get('contactSubject').touched, 'is-invalid' : contactForm.get('contactSubject').invalid && contactForm.get('contactSubject').touched}"
+                  formControlName="subject"
+                  [ngClass]="{'is-valid' : contactForm.get('subject').valid && contactForm.get('subject').touched, 'is-invalid' : contactForm.get('subject').invalid && contactForm.get('subject').touched}"
                   class="form-control"
                   required
                 >
@@ -66,8 +66,8 @@
                 <textarea
                   name="contactContent"
                   id="contactContent"
-                  formControlName="contactContent"
-                  [ngClass]="{'is-valid' : contactForm.get('contactContent').valid && contactForm.get('contactContent').touched, 'is-invalid' : contactForm.get('contactContent').invalid && contactForm.get('contactContent').touched}"
+                  formControlName="content"
+                  [ngClass]="{'is-valid' : contactForm.get('content').valid && contactForm.get('content').touched, 'is-invalid' : contactForm.get('content').invalid && contactForm.get('content').touched}"
                   class="form-control"
                   required
                 >

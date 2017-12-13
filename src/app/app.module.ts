@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { StoreModule } from '@ngrx/store';
+import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { environment } from '../environments/environment';
@@ -13,6 +14,7 @@ import { CoreModule } from './core/core.module';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { reducers } from './store/app.reducers';
+import { ProductEffects } from './home/store/product.effects';
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { reducers } from './store/app.reducers';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     CoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -29,7 +32,8 @@ import { reducers } from './store/app.reducers';
     AngularFontAwesomeModule,
     EffectsModule,
     StoreModule.forRoot(reducers),
-    !environment.production ? StoreDevtoolsModule : [],
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([ProductEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

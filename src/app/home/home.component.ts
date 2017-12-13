@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
-import { Product } from '../core/product/product.interface';
 import { Photo } from './home.interface';
+import * as fromApp from '../store/app.reducers';
+import * as fromProducts from '../home/store/product.reducers';
+import * as ProductActions from './store/product.actions';
 
 @Component({
   selector: 'app-home',
@@ -10,27 +14,7 @@ import { Photo } from './home.interface';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  closeResult: string;
-  products: Product[] = [
-    {
-      name: 'first product',
-      url: 'https://www.gracefruit.com/uploads/images/products/large/gracefruit_gracefruit_honeyquat50solution_1460546582honeyflavouroil135894175550ffce3b1379a.jpg',
-      shortDescription: 'lorem ipsum',
-      longDescription: 'lorem ipsum',
-    },
-    {
-      name: 'first product',
-      url: 'https://www.gracefruit.com/uploads/images/products/large/gracefruit_gracefruit_honeyquat50solution_1460546582honeyflavouroil135894175550ffce3b1379a.jpg',
-      shortDescription: 'lorem ipsum',
-      longDescription: 'lorem ipsum',
-    },
-    {
-      name: 'first product',
-      url: 'https://www.gracefruit.com/uploads/images/products/large/gracefruit_gracefruit_honeyquat50solution_1460546582honeyflavouroil135894175550ffce3b1379a.jpg',
-      shortDescription: 'lorem ipsum',
-      longDescription: 'lorem ipsum',
-    },
-  ];
+  productsState: Observable<fromProducts.State> = this.store.select('products');
 
   gallery: Photo[] = [
     {
@@ -61,9 +45,12 @@ export class HomeComponent implements OnInit {
 
   modalPhoto: Photo;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,
+              private store: Store<fromApp.AppState>) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(new ProductActions.FetchProducts());
+  }
 
   open(content, photo: Photo) {
     this.modalPhoto = photo;
