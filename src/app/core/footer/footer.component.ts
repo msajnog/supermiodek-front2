@@ -26,7 +26,7 @@ export class FooterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.store.dispatch(new FooterActions.SendContactForm({contact: this.contactForm.value}));
+    this.store.dispatch(new FooterActions.SendContactForm(this.contactForm.value));
     // this.contactForm.reset();
   }
 }
