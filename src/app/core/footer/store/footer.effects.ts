@@ -9,7 +9,7 @@ import { ContactDataResponse } from '../footer.interface';
 
 @Injectable()
 export class FooterEffects {
-  @Effect({ dispatch: false })
+  @Effect()
   sendContact = this.action$
     .ofType(FooterActions.SEND_CONTACT_FORM)
     .mergeMap((action: FooterActions.SendContactForm) => {
