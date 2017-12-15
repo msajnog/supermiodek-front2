@@ -39,6 +39,7 @@ export class FooterComponent implements OnInit {
     this.contactFormSend.subscribe((value) => {
       if (value) {
         this.contactForm.reset();
+        this.store.dispatch(new FooterActions.SetContactFormStatus(false));
       }
     });
   }
