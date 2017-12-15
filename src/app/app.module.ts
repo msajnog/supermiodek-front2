@@ -7,14 +7,15 @@ import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { ToasterModule } from 'angular2-toaster';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { reducers } from './store/app.reducers';
-import { ProductEffects } from './home/store/product.effects';
+import { rootReducer } from './store/app.reducers';
+import { ProductEffects } from './home/store/home.effects';
 
 
 @NgModule({
@@ -25,15 +26,16 @@ import { ProductEffects } from './home/store/product.effects';
   imports: [
     BrowserModule,
     HttpClientModule,
+    ToasterModule,
     CoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     AngularFontAwesomeModule,
     EffectsModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(rootReducer),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([ProductEffects])
+    EffectsModule.forRoot([ProductEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]

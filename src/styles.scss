@@ -2,9 +2,11 @@
 
 @import "styles/overrides";
 @import "~bootstrap/scss/bootstrap";
+@import "~angular2-toaster/toaster";
 @import "styles/variables";
 @import "styles/helpers";
 @import "styles/global";
 @import "styles/forms";
 @import "app/core/header/header.component";
 @import "app/home/home.component";
+@import "app/core/product/product.component";

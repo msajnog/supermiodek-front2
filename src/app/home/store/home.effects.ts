@@ -2,7 +2,7 @@ import { Actions, Effect } from '@ngrx/effects';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import * as ProductActions from './product.actions';
+import * as ProductActions from './home.actions';
 import { ProductResponse } from '../../core/product/product.interface';
 
 @Injectable()

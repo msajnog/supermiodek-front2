@@ -66,7 +66,7 @@
   <div class="container products-list">
     <div class="row justify-content-center">
       <app-product class="col-xs-12 col-sm-6 col-md-3 product-item"
-                   *ngFor="let product of (productsState | async).products"
+                   *ngFor="let product of (productsState | async)"
                    [product]="product">
       </app-product>
     </div>
@@ -110,7 +110,7 @@
   <h4>Galeria</h4>
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-xm-6 col-md-4" *ngFor="let photo of gallery">
+      <div class="col-xs-12 col-xm-6 col-md-4" *ngFor="let photo of (gallery | async)">
         <div class="img" (click)="open(content, photo)">
           <img [src]="photo.thumbnailUrl" alt="" />
         </div>
