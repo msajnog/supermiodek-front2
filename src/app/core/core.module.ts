@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { EffectsModule } from '@ngrx/effects';
 import { FooterEffects } from './footer/store/footer.effects';
 import { ToasterModule } from 'angular2-toaster';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ToasterModule } from 'angular2-toaster';
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     ToasterModule,
+    RouterModule,
     EffectsModule.forFeature([FooterEffects])
   ],
   exports: [

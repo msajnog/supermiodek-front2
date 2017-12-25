@@ -1,0 +1,126 @@
+<div class="container">
+  <form [formGroup]="orderForm" id="orderForm" novalidate>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="form-group">
+          <label for="name"
+                 class="form-control-label">
+            Imię<em>*</em>
+          </label>
+          <input type="text"
+                 id="name"
+                 name="name"
+                 formControlName="name"
+                 class="form-control"
+                 [ngClass]="{'is-valid' : orderForm.get('name').valid && orderForm.get('name').touched, 'is-invalid' : orderForm.get('name').invalid && orderForm.get('name').touched}"
+                 placeholder="Imię"
+                 required>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="form-group">
+          <label for="surname" class="form-control-label">
+            Nazwisko<em>*</em>
+          </label>
+          <input type="text"
+                 id="surname"
+                 name="surname"
+                 formControlName="surname"
+                 class="form-control"
+                 [ngClass]="{'is-valid' : orderForm.get('surname').valid && orderForm.get('surname').touched, 'is-invalid' : orderForm.get('surname').invalid && orderForm.get('surname').touched}"
+                 placeholder="Nazwisko"
+                 required>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="form-group">
+          <label for="email"
+                 class="form-control-label">
+            Adres e-mail<em>*</em>
+          </label>
+          <input type="email"
+                 id="email"
+                 name="email"
+                 formControlName="email"
+                 class="form-control"
+                 [ngClass]="{'is-valid' : orderForm.get('email').valid && orderForm.get('email').touched, 'is-invalid' : orderForm.get('email').invalid && orderForm.get('email').touched}"
+                 placeholder="Adres e-mail"
+                 required>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="form-group">
+          <label for="phone"
+                 class="form-control-label">
+            Numer telefonu<em>*</em>
+          </label>
+          <input type="tel"
+                 id="phone"
+                 name="phone"
+                 formControlName="phone"
+                 class="form-control"
+                 [ngClass]="{'is-valid' : orderForm.get('phone').valid && orderForm.get('phone').touched, 'is-invalid' : orderForm.get('phone').invalid && orderForm.get('phone').touched}"
+                 placeholder="Telefon"
+                 required>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-xs-12  col-sm-6">
+        <div class="form-group">
+          <label for="shipping"
+                 class="form-control-label">
+            Adres dostawy<em>*</em>
+          </label>
+          <textarea id="shipping"
+                    name="shipping"
+                    formControlName="shipping"
+                    class="form-control"
+                    [ngClass]="{'is-valid' : orderForm.get('shipping').valid && orderForm.get('shipping').touched, 'is-invalid' : orderForm.get('shipping').invalid && orderForm.get('shipping').touched}"
+                    placeholder="Adres dostawy"
+                    required></textarea>
+        </div>
+      </div>
+      <div class="col-xs-12  col-sm-6">
+        <div class="form-group">
+          <label for="comment" class="form-control-label">
+            Komentarz
+          </label>
+          <textarea id="comment"
+                    name="comment"
+                    class="form-control"
+                    [ngClass]="{'is-valid' : orderForm.get('comment').valid && orderForm.get('comment').touched, 'is-invalid' : orderForm.get('comment').invalid && orderForm.get('comment').touched}"
+                    formControlName="comment"
+                    placeholder="Komentarz"></textarea>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <h1 class="red">Wybierz produkty</h1>
+        <div class="row justify-content-center">
+          <app-product class="col-xs-12 col-sm-6 col-md-3 product-item"
+                       *ngFor="let product of (productsState | async)"
+                       [product]="product">
+          </app-product>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <p class="total">Do zapłaty: <b></b></p>
+      </div>
+
+      <!--<div class="col-xs-12">-->
+      <!--<p class="bg-danger" ng-show="productsRequired">Musisz wybrać przynajmniej jeden produkt</p>-->
+      <!--</div>-->
+      <!--<div class="col-xs-12">-->
+      <!--<p class="bg-danger" ng-show="formInvalid">Wypełnij prawidłowo wszystkie wymagane pola</p>-->
+      <!--</div>-->
+      <div class="col-12">
+        <p class="bg-success" ng-show="submitSuccess"></p>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Złóż zamówienie</button>
+      </div>
+    </div>
+  </form>
+</div>

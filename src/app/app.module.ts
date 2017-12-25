@@ -16,12 +16,15 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { rootReducer } from './store/app.reducers';
 import { ProductEffects } from './home/store/home.effects';
+import { ShopComponent } from './shop/shop.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    ShopComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { ProductEffects } from './home/store/home.effects';
     NgbModule.forRoot(),
     AngularFontAwesomeModule,
     EffectsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(rootReducer),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([ProductEffects]),
