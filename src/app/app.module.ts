@@ -18,6 +18,7 @@ import { rootReducer } from './store/app.reducers';
 import { ProductEffects } from './home/store/home.effects';
 import { ShopComponent } from './shop/shop.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { FormatPrice } from './shop/formatPrice.pipe';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     AppComponent,
     HomeComponent,
     ShopComponent,
+    FormatPrice
   ],
   imports: [
     BrowserModule,

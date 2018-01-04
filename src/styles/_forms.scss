@@ -78,23 +78,27 @@ textarea.form-control {
   &.custom-checkbox {
     margin-top: 10px;
     margin-bottom: 20px;
-    cursor: pointer;
 
-    .custom-control-indicator {
-      top: 0;
-      width: 2rem;
-      height: 2rem;
-      background-color: #bdbdbd;
-      border-radius: 0;
-    }
-
-    .custom-control-input:checked ~ .custom-control-indicator {
-      background-color: $blue;
-    }
-
-    .custom-control-description {
+    label.custom-control-label {
       font-size: 1.4rem;
       margin-left: 10px;
+      cursor: pointer;
+
+      &:before {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: #bdbdbd;
+        border-radius: 0;
+      }
+
+      &:after {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+    .custom-control-input:checked ~ label.custom-control-label:before {
+      background-color: $blue;
     }
   }
 }

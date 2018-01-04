@@ -73,18 +73,21 @@
                 >
                 </textarea>
               </div>
-              <div class="checkbox">
-                <label class="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    formControlName="sendCopy"
-                  >
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Wyślij kopię na mój adres</span>
-                </label>
+              <!--<div class="checkbox">-->
+                <!--<label class="custom-control custom-checkbox">-->
+                  <!--<input-->
+                    <!--type="checkbox"-->
+                    <!--class="custom-control-input"-->
+                    <!--formControlName="sendCopy"-->
+                  <!--&gt;-->
+                  <!--<span class="custom-control-indicator"></span>-->
+                  <!--<span class="custom-control-description">Wyślij kopię na mój adres</span>-->
+                <!--</label>-->
+              <!--</div>-->
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" formControlName="sendCopy" id="sendCopy">
+                <label class="custom-control-label" for="sendCopy">Wyślij kopię na mój adres</label>
               </div>
-              <!--<button type="button" class="btn btn-secondary" (click)="popToast()">POP</button>-->
               <button type="submit" class="btn btn-secondary" [disabled]="!contactForm.valid">Wyślij</button>
             </div>
           </div>

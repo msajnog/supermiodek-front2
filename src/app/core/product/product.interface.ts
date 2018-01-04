@@ -4,8 +4,12 @@ export interface ProductResponse {
 }
 
 export interface Product {
+  _id: string;
   name: string;
   image: string;
   shortDescription: string;
-  longDescription: string;
+  description: string;
+  price: string;
+  status: string;
+  availability: number;
 }

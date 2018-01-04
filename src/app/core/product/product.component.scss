@@ -2,6 +2,7 @@
 @import "../../../styles/helpers";
 
 :host {
+  text-align: center;
   margin-bottom: 30px;
   padding-bottom: $grid-gutter-width / 2;
   border: 1px solid transparent;
