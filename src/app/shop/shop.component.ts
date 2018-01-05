@@ -1,12 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Product } from '../core/product/product.interface';
 import * as fromApp from '../store/app.interface';
 import * as ProductActions from '../home/store/home.actions';
+import * as ShopActions from './store/shop.actions';
+import { ShipmentMethod } from './shop.interface';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-shop',
@@ -17,39 +20,55 @@ export class ShopComponent implements OnInit, OnDestroy {
   orderForm: FormGroup;
   products: Product[] = [];
   productsState: Subscription;
+  shipmentMethodsState: Observable<ShipmentMethod[]> = this.store.select('shop', 'shipmentMethods');
   summaryPrice = 0;
   productsOrdered = false;
 
-  constructor(private store: Store<fromApp.AppState>) { }
+  constructor(private store: Store<fromApp.AppState>,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
     this.store.dispatch(new ProductActions.FetchProducts());
-
-    const productsGroup = new FormArray([]);
+    this.store.dispatch(new ShopActions.GetShipmentMethods());
 
     this.productsState = this.store.select('home', 'products')
       .subscribe(
         (products: Product[]) => {
-          if (products) {
-            products.forEach(product => {
-              productsGroup.push(
-                new FormGroup({
-                  '_id': new FormControl(product._id),
-                  'name': new FormControl(product.name, Validators.required),
-                  'image': new FormControl(product.image, Validators.required),
-                  'availability': new FormControl(product.availability, Validators.required),
-                  'status': new FormControl(product.status, Validators.required),
-                  'price': new FormControl(product.price, Validators.required),
-                  'description': new FormControl(product.description, Validators.required),
-                  'shortDescription': new FormControl(product.shortDescription, Validators.required),
-                  'quantity': new FormControl(0, [Validators.min(0), Validators.max(product.availability)]),
-                })
-              );
-            });
-          }
+          this.initForm(products);
         }
       );
 
+    // this.shipmentMethodsState = this.store.select('shop', 'shipmentMethods')
+    //   .subscribe(
+    //     (shipmentMethods: ShipmentMethod[]) => {
+    //       console.log('shipmentMethods', shipmentMethods);
+    //     }
+    //   );
+  }
+
+  ngOnDestroy() {
+    this.productsState.unsubscribe();
+  }
+
+  initForm(products: Product[]) {
+    const productsGroup = new FormArray([]);
+    if (products) {
+      products.forEach(product => {
+        productsGroup.push(
+          new FormGroup({
+            '_id': new FormControl(product._id),
+            'name': new FormControl(product.name, Validators.required),
+            'image': new FormControl(product.image, Validators.required),
+            'availability': new FormControl(product.availability, Validators.required),
+            'status': new FormControl(product.status, Validators.required),
+            'price': new FormControl(product.price, Validators.required),
+            'description': new FormControl(product.description, Validators.required),
+            'shortDescription': new FormControl(product.shortDescription, Validators.required),
+            'quantity': new FormControl(0, [Validators.min(0), Validators.max(product.availability)]),
+          })
+        );
+      });
+    }
     this.orderForm = new FormGroup({
       'name': new FormControl(null, [Validators.required]),
       'surname': new FormControl(null, [Validators.required]),
@@ -59,10 +78,6 @@ export class ShopComponent implements OnInit, OnDestroy {
       'comment': new FormControl(),
       'products': productsGroup
     });
-  }
-
-  ngOnDestroy() {
-    this.productsState.unsubscribe();
   }
 
   getControls() {
@@ -111,5 +126,14 @@ export class ShopComponent implements OnInit, OnDestroy {
     if (quantity > 0) {
       this.productsOrdered = true;
     }
+  }
+
+  open(content) {
+    console.log('this.orderForm.value', this.orderForm.value);
+    this.modalService.open(content);
+  }
+
+  onSubmit() {
+
   }
 }

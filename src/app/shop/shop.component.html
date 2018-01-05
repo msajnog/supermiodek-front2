@@ -102,13 +102,13 @@
                *ngFor="let productControl of getControls(); let i = index;"
                [formGroupName]="i">
 
-            <a href="#" class="img"><img [src]="productControl.controls.image.value" alt="{{ productControl.controls.name.value }}" /></a>
-            <a href="#" class="name">{{ productControl.controls.name.value }}</a>
-            <div class="short-desc">{{ productControl.controls.shortDescription.value }}</div>
+            <a href="#" class="img"><img [src]="productControl.get('image').value" alt="{{ productControl.get('name').value }}" /></a>
+            <a href="#" class="name">{{ productControl.get('name').value }}</a>
+            <div class="short-desc">{{ productControl.get('shortDescription').value }}</div>
 
-            <p class="availability">Dostępność: {{ productControl.controls.availability.value }} szt.</p>
+            <p class="availability">Dostępność: {{ productControl.get('availability').value }} szt.</p>
             <div class="row justify-content-between align-items-center no-gutters">
-              <div class="price">{{ productControl.controls.price.value | formatPrice }} zł</div>
+              <div class="price">{{ productControl.get('price').value | formatPrice }} zł</div>
               <div class="quantity">
                 <button type="button"
                         (click)="decrease(i)">
@@ -118,7 +118,7 @@
                 <input type="number"
                        (change)="calculateTotal()"
                        min="0"
-                       max="{{ productControl.controls.availability.value }}"
+                       max="{{ productControl.get('availability').value }}"
                        name="quantity"
                        value="0"
                        class="form-control"
@@ -147,11 +147,72 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-12">
-        <p class="bg-success" ng-show="submitSuccess"></p>
+        <!--<p class="bg-success" [hidden]="!submitSuccess"></p>-->
       </div>
-      <button type="submit"
-              [disabled]="!orderForm.valid || !productsOrdered"
-              class="btn btn-primary">Złóż zamówienie</button>
+              <!--[disabled]="!orderForm.valid || !productsOrdered"-->
+      <button type="button"
+              class="btn btn-primary"
+              (click)="open(shipmentAndPayment)">
+        Złóż zamówienie
+      </button>
     </div>
+    <ng-template #shipmentAndPayment let-close="close">
+      <fa name="times" size="2x" class="cross-close" (click)="close()"></fa>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-header">
+            Podsumowanie
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <b>Dane klienta</b><br>
+                <span>{{ orderForm.get('name').value }} {{ orderForm.get('surname').value }}</span><br>
+                <span>{{ orderForm.get('email').value }}</span><br>
+                <span>{{ orderForm.get('phone').value }}</span><br>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <b>Dane do dostawy</b>
+                <pre>{{ orderForm.get('shipping').value }}</pre>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nazwa</th>
+                  <th>Ilość</th>
+                  <th>Cena za sztukę</th>
+                  <th>Suma</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of orderForm.value.products | checkQuantity; let i = index;">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.quantity }}</td>
+                  <td>{{ product.price | formatPrice }} zł</td>
+                  <td>{{ product.name }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12"><b>Wybierz metodę dostawy<em>*</em></b></div>
+              <div class="col-xs-12 col-sm-3" *ngFor="let method of (shipmentMethodsState | async); let i = index">
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="method{{i}}" name="shipmentMethod" required>
+                  <label class="custom-control-label" for="method{{i}}">{{ method.name }} {{ method.price | formatPrice }}zł</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </form>
 </div>
+

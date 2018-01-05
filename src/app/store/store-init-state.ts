@@ -1,6 +1,7 @@
 import { Product } from '../core/product/product.interface';
 import { ContactData } from '../core/footer/footer.interface';
 import { Photo } from '../home/home.interface';
+import { ShipmentMethod } from '../shop/shop.interface';
 
 export const appInitialState = {
   home: {
@@ -31,6 +32,9 @@ export const appInitialState = {
       },
     ],
     products: <Product[]>[]
+  },
+  shop: {
+    shipmentMethods: <ShipmentMethod[]>[],
   },
   footer: {
     contactData: <ContactData>{

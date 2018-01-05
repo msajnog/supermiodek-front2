@@ -75,7 +75,7 @@ textarea.form-control {
 }
 
 .custom-control {
-  &.custom-checkbox {
+  &.custom-checkbox, &.custom-radio {
     margin-top: 10px;
     margin-bottom: 20px;
 
@@ -99,6 +99,14 @@ textarea.form-control {
 
     .custom-control-input:checked ~ label.custom-control-label:before {
       background-color: $blue;
+    }
+  }
+
+  &.custom-radio {
+    label.custom-control-label {
+      &:before {
+        border-radius: 50%;
+      }
     }
   }
 }

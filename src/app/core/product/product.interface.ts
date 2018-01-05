@@ -12,4 +12,5 @@ export interface Product {
   price: string;
   status: string;
   availability: number;
+  quantity?: number;
 }
