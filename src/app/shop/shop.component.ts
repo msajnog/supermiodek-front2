@@ -9,7 +9,6 @@ import * as fromApp from '../store/app.interface';
 import * as ProductActions from '../home/store/home.actions';
 import * as ShopActions from './store/shop.actions';
 import { ShipmentMethod } from './shop.interface';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-shop',
@@ -20,8 +19,10 @@ export class ShopComponent implements OnInit, OnDestroy {
   orderForm: FormGroup;
   products: Product[] = [];
   productsState: Subscription;
-  shipmentMethodsState: Observable<ShipmentMethod[]> = this.store.select('shop', 'shipmentMethods');
-  summaryPrice = 0;
+  shipmentMethodsState: Subscription; // Observable<ShipmentMethod[]> = this.store.select('shop', 'shipmentMethods');
+  shipmentMethods;
+  productsTotal = 0;
+  total = 0;
   productsOrdered = false;
 
   constructor(private store: Store<fromApp.AppState>,
@@ -38,16 +39,17 @@ export class ShopComponent implements OnInit, OnDestroy {
         }
       );
 
-    // this.shipmentMethodsState = this.store.select('shop', 'shipmentMethods')
-    //   .subscribe(
-    //     (shipmentMethods: ShipmentMethod[]) => {
-    //       console.log('shipmentMethods', shipmentMethods);
-    //     }
-    //   );
+    this.shipmentMethodsState = this.store.select('shop', 'shipmentMethods')
+      .subscribe(
+        (shipmentMethods: ShipmentMethod[]) => {
+          this.shipmentMethods = shipmentMethods;
+        }
+      );
   }
 
   ngOnDestroy() {
     this.productsState.unsubscribe();
+    this.shipmentMethodsState.unsubscribe();
   }
 
   initForm(products: Product[]) {
@@ -76,6 +78,7 @@ export class ShopComponent implements OnInit, OnDestroy {
       'phone': new FormControl(null, [Validators.pattern('\\d+'), Validators.minLength(9)]),
       'shipping': new FormControl(null, [Validators.required]),
       'comment': new FormControl(),
+
       'products': productsGroup
     });
   }
@@ -106,7 +109,7 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   calculateTotal() {
     const productsControls = (<FormArray>this.orderForm.get('products')).controls;
-    this.summaryPrice = 0;
+    this.productsTotal = 0;
     this.productsOrdered = false;
     productsControls.forEach(product => {
       let quantity = product.get('quantity').value;
@@ -115,11 +118,11 @@ export class ShopComponent implements OnInit, OnDestroy {
         product.get('quantity').setValue(0);
       }
       const price = product.get('price').value;
-      this.summaryPrice += (quantity * price);
+      this.productsTotal += (quantity * price);
       this.checkOrderedProducts(quantity);
     });
 
-    this.summaryPrice = +this.summaryPrice.toFixed(2);
+    this.productsTotal = +this.productsTotal.toFixed(2);
   }
 
   checkOrderedProducts(quantity: number) {
@@ -129,11 +132,21 @@ export class ShopComponent implements OnInit, OnDestroy {
   }
 
   open(content) {
-    console.log('this.orderForm.value', this.orderForm.value);
-    this.modalService.open(content);
+    this.total = this.productsTotal;
+    this.orderForm.addControl('shipment', new FormControl(null, Validators.required));
+    this.modalService.open(content).result.then(() => {
+      this.orderForm.removeControl('shipment');
+    }, () => {
+      this.orderForm.removeControl('shipment');
+    });
+  }
+
+  onMethodSelect(method) {
+    this.total = (this.productsTotal + method.price).toFixed(2);
   }
 
   onSubmit() {
-
+    const order = Object.assign({}, this.orderForm.value);
+    [order.shipment] = this.shipmentMethods.filter(method => method._id === order.shipment);
   }
 }

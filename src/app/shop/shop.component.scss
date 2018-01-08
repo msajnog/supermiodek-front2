@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+@import "~bootstrap/scss/variables";
 @import "../../styles/helpers";
 
 #orderForm {
@@ -72,6 +73,48 @@
   padding-top: 35px;
   font-size: 1.4rem;
 
+  .card {
+    .card-body {
+      border-bottom: 1px solid $gray-300;
+
+      &:last-of-type {
+        border-bottom: 0;
+      }
+
+      .total {
+        font-size: 2rem;
+        color: $brown;
+        text-transform: uppercase;
+        margin: 0 2rem 0 0;
+      }
+    }
+  }
+
+  .table {
+    th {
+      border-top: 0;
+      border-bottom-width: 1px;
+    }
+
+    th, td {
+      text-align: center;
+
+      &:first-of-type {
+        text-align: left;
+      }
+
+      &:last-of-type {
+        text-align: right;
+      }
+    }
+
+    tfoot {
+      td {
+        border-bottom: 1px solid $gray-300;
+      }
+    }
+  }
+
   pre {
     display: block;
     padding: 9.5px;
@@ -84,5 +127,9 @@
     background-color: #f5f5f5;
     border: 1px solid #ccc;
     border-radius: 4px;
+  }
+
+  .actions {
+    margin-top: 3rem;
   }
 }

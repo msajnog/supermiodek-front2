@@ -135,22 +135,12 @@
       </div>
 
       <div class="col-12">
-        <p class="total">Do zapłaty: <b>{{ summaryPrice | formatPrice }} zł</b></p>
+        <p class="total">Wartość produktów: <b>{{ productsTotal | formatPrice }} zł</b></p>
       </div>
-
-      <!--<div class="col-xs-12">-->
-      <!--<p class="bg-danger" ng-show="productsRequired">Musisz wybrać przynajmniej jeden produkt</p>-->
-      <!--</div>-->
-      <!--<div class="col-xs-12">-->
-      <!--<p class="bg-danger" ng-show="formInvalid">Wypełnij prawidłowo wszystkie wymagane pola</p>-->
-      <!--</div>-->
     </div>
     <div class="row justify-content-center">
-      <div class="col-12">
-        <!--<p class="bg-success" [hidden]="!submitSuccess"></p>-->
-      </div>
-              <!--[disabled]="!orderForm.valid || !productsOrdered"-->
       <button type="button"
+              [disabled]="!orderForm.valid || !productsOrdered"
               class="btn btn-primary"
               (click)="open(shipmentAndPayment)">
         Złóż zamówienie
@@ -194,21 +184,52 @@
                   <td>{{ product.name }}</td>
                   <td>{{ product.quantity }}</td>
                   <td>{{ product.price | formatPrice }} zł</td>
-                  <td>{{ product.name }}</td>
+                  <td>{{ (product.price * product.quantity).toFixed(2) | formatPrice }} zł</td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5">Suma: <b>{{ productsTotal | formatPrice}} zł</b></td>
+                </tr>
+              </tfoot>
             </table>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-12"><b>Wybierz metodę dostawy<em>*</em></b></div>
-              <div class="col-xs-12 col-sm-3" *ngFor="let method of (shipmentMethodsState | async); let i = index">
+              <div class="col-xs-12 col-sm-3" *ngFor="let method of shipmentMethods; let i = index">
                 <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" id="method{{i}}" name="shipmentMethod" required>
+                  <input type="radio"
+                         class="custom-control-input"
+                         id="method{{i}}"
+                         (change)="onMethodSelect(method)"
+                         value="{{ method._id }}"
+                         formControlName="shipment"
+                         required>
                   <label class="custom-control-label" for="method{{i}}">{{ method.name }} {{ method.price | formatPrice }}zł</label>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="card-body">
+            <div class="row col-xs-12 justify-content-end">
+              <p class="total">Do zapłaty: <b>{{ total | formatPrice }} zł</b></p>
+            </div>
+          </div>
+        </div>
+        <div class="actions row justify-content-center">
+          <div class="col-xs-12">
+            <button type="button"
+                    class="btn btn-secondary btn-small"
+                    (click)="close()">
+              Wróć
+            </button>
+            <button type="submit"
+                    class="btn btn-primary"
+                    (click)="onSubmit()"
+                    [disabled]="!orderForm.valid || !productsOrdered">
+              Wyślij
+            </button>
           </div>
         </div>
       </div>
