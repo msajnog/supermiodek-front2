@@ -148,5 +148,8 @@ export class ShopComponent implements OnInit, OnDestroy {
   onSubmit() {
     const order = Object.assign({}, this.orderForm.value);
     [order.shipment] = this.shipmentMethods.filter(method => method._id === order.shipment);
+    order.productsTotal = this.productsTotal;
+    order.total = this.total;
+    this.store.dispatch(new ShopActions.PlaceOrder(order));
   }
 }
