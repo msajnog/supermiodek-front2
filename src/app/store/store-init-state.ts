@@ -35,6 +35,8 @@ export const appInitialState = {
   },
   shop: {
     shipmentMethods: <ShipmentMethod[]>[],
+    orderData: null,
+    orderDataSend: false,
   },
   footer: {
     contactData: <ContactData>{

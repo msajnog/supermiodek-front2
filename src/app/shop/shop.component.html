@@ -1,6 +1,6 @@
 <div class="container">
   <form [formGroup]="orderForm"  (ngSubmit)="onSubmit()" id="orderForm" novalidate>
-    <div class="row">
+    <div formGroupName="client" class="row">
       <div class="col-xs-12 col-sm-6">
         <div class="form-group">
           <label for="name"
@@ -12,7 +12,7 @@
                  name="name"
                  formControlName="name"
                  class="form-control"
-                 [ngClass]="{'is-valid' : orderForm.get('name').valid && orderForm.get('name').touched, 'is-invalid' : orderForm.get('name').invalid && orderForm.get('name').touched}"
+                 [ngClass]="{'is-valid' : orderForm.get('client.name').valid && orderForm.get('client.name').touched, 'is-invalid' : orderForm.get('client.name').invalid && orderForm.get('client.name').touched}"
                  placeholder="Imię"
                  required>
         </div>
@@ -27,7 +27,7 @@
                  name="surname"
                  formControlName="surname"
                  class="form-control"
-                 [ngClass]="{'is-valid' : orderForm.get('surname').valid && orderForm.get('surname').touched, 'is-invalid' : orderForm.get('surname').invalid && orderForm.get('surname').touched}"
+                 [ngClass]="{'is-valid' : orderForm.get('client.surname').valid && orderForm.get('client.surname').touched, 'is-invalid' : orderForm.get('client.surname').invalid && orderForm.get('client.surname').touched}"
                  placeholder="Nazwisko"
                  required>
         </div>
@@ -43,7 +43,7 @@
                  name="email"
                  formControlName="email"
                  class="form-control"
-                 [ngClass]="{'is-valid' : orderForm.get('email').valid && orderForm.get('email').touched, 'is-invalid' : orderForm.get('email').invalid && orderForm.get('email').touched}"
+                 [ngClass]="{'is-valid' : orderForm.get('client.email').valid && orderForm.get('client.email').touched, 'is-invalid' : orderForm.get('client.email').invalid && orderForm.get('client.email').touched}"
                  placeholder="Adres e-mail"
                  required>
         </div>
@@ -59,7 +59,7 @@
                  name="phone"
                  formControlName="phone"
                  class="form-control"
-                 [ngClass]="{'is-valid' : orderForm.get('phone').valid && orderForm.get('phone').touched, 'is-invalid' : orderForm.get('phone').invalid && orderForm.get('phone').touched}"
+                 [ngClass]="{'is-valid' : orderForm.get('client.phone').valid && orderForm.get('client.phone').touched, 'is-invalid' : orderForm.get('client.phone').invalid && orderForm.get('client.phone').touched}"
                  placeholder="Telefon"
                  required>
         </div>
@@ -73,9 +73,9 @@
           </label>
           <textarea id="shipping"
                     name="shipping"
-                    formControlName="shipping"
+                    formControlName="shipment"
                     class="form-control"
-                    [ngClass]="{'is-valid' : orderForm.get('shipping').valid && orderForm.get('shipping').touched, 'is-invalid' : orderForm.get('shipping').invalid && orderForm.get('shipping').touched}"
+                    [ngClass]="{'is-valid' : orderForm.get('client.shipment').valid && orderForm.get('client.shipment').touched, 'is-invalid' : orderForm.get('client.shipment').invalid && orderForm.get('client.shipment').touched}"
                     placeholder="Adres dostawy"
                     required></textarea>
         </div>
@@ -88,49 +88,51 @@
           <textarea id="comment"
                     name="comment"
                     class="form-control"
-                    [ngClass]="{'is-valid' : orderForm.get('comment').valid && orderForm.get('comment').touched, 'is-invalid' : orderForm.get('comment').invalid && orderForm.get('comment').touched}"
+                    [ngClass]="{'is-valid' : orderForm.get('client.comment').valid && orderForm.get('client.comment').touched, 'is-invalid' : orderForm.get('client.comment').invalid && orderForm.get('client.comment').touched}"
                     formControlName="comment"
                     placeholder="Komentarz"></textarea>
         </div>
       </div>
-
+    </div>
+    <div class="row">
       <div class="col-12">
         <h1 class="red">Wybierz produkty</h1>
         <div class="row justify-content-center"
              formArrayName="products">
-          <div class="col-xs-12 col-sm-6 col-md-3 product-item"
-               *ngFor="let productControl of getControls(); let i = index;"
-               [formGroupName]="i">
+          <ng-container *ngFor="let productControl of getControls(); let i = index;">
+            <div class="col-xs-12 col-sm-6 col-md-3 product-item"
+                 *ngIf="productControl.get('availability').value"
+                 [formGroupName]="i">
+              <a href="#" class="img"><img [src]="productControl.get('image').value" alt="{{ productControl.get('name').value }}" /></a>
+              <a href="#" class="name">{{ productControl.get('name').value }}</a>
+              <div class="short-desc">{{ productControl.get('shortDescription').value }}</div>
 
-            <a href="#" class="img"><img [src]="productControl.get('image').value" alt="{{ productControl.get('name').value }}" /></a>
-            <a href="#" class="name">{{ productControl.get('name').value }}</a>
-            <div class="short-desc">{{ productControl.get('shortDescription').value }}</div>
-
-            <p class="availability">Dostępność: {{ productControl.get('availability').value }} szt.</p>
-            <div class="row justify-content-between align-items-center no-gutters">
-              <div class="price">{{ productControl.get('price').value | formatPrice }} zł</div>
-              <div class="quantity">
-                <button type="button"
-                        (click)="decrease(i)">
-                  <fa name="minus"
-                      size="1x"></fa>
-                </button>
-                <input type="number"
-                       (change)="calculateTotal()"
-                       min="0"
-                       max="{{ productControl.get('availability').value }}"
-                       name="quantity"
-                       value="0"
-                       class="form-control"
-                       formControlName="quantity">
-                <button type="button"
-                        (click)="increase(i)">
-                  <fa name="plus"
-                      size="1x"></fa>
-                </button>
+              <p class="availability">Dostępność: {{ productControl.get('availability').value }} szt.</p>
+              <div class="row justify-content-between align-items-center no-gutters">
+                <div class="price">{{ productControl.get('price').value | formatPrice }} zł</div>
+                <div class="quantity">
+                  <button type="button"
+                          (click)="decrease(i)">
+                    <fa name="minus"
+                        size="1x"></fa>
+                  </button>
+                  <input type="number"
+                         (change)="calculateTotal()"
+                         min="0"
+                         max="{{ productControl.get('availability').value }}"
+                         name="quantity"
+                         value="0"
+                         class="form-control"
+                         formControlName="quantity">
+                  <button type="button"
+                          (click)="increase(i)">
+                    <fa name="plus"
+                        size="1x"></fa>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </ng-container>
         </div>
       </div>
 
@@ -157,13 +159,13 @@
             <div class="row">
               <div class="col-xs-12 col-md-6">
                 <b>Dane klienta</b><br>
-                <span>{{ orderForm.get('name').value }} {{ orderForm.get('surname').value }}</span><br>
-                <span>{{ orderForm.get('email').value }}</span><br>
-                <span>{{ orderForm.get('phone').value }}</span><br>
+                <span>{{ orderForm.get('client.name').value }} {{ orderForm.get('client.surname').value }}</span><br>
+                <span>{{ orderForm.get('client.email').value }}</span><br>
+                <span>{{ orderForm.get('client.phone').value }}</span><br>
               </div>
               <div class="col-xs-12 col-md-6">
                 <b>Dane do dostawy</b>
-                <pre>{{ orderForm.get('shipping').value }}</pre>
+                <pre>{{ orderForm.get('client.shipment').value }}</pre>
               </div>
             </div>
           </div>
@@ -226,7 +228,7 @@
             </button>
             <button type="submit"
                     class="btn btn-primary"
-                    (click)="onSubmit()"
+                    (click)="onSubmit(close)"
                     [disabled]="!orderForm.valid || !productsOrdered">
               Wyślij
             </button>

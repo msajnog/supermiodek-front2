@@ -7,7 +7,7 @@ import { ShipmentMethodResponse } from '../shop.interface';
 import { Observable } from 'rxjs/Observable';
 import { ContactDataResponse } from '../../core/footer/footer.interface';
 import * as FooterActions from '../../core/footer/store/footer.actions';
-import { Toast } from 'angular2-toaster';
+import { Toast, ToasterService } from 'angular2-toaster';
 
 @Injectable()
 export class ShopEffects {
@@ -46,15 +46,16 @@ export class ShopEffects {
               type: 'success',
               title: response.message,
             };
-            // this.toasterService.pop(toast);
+            this.toasterService.pop(toast);
           }
           return {
-            type: FooterActions.SET_CONTACT_FORM_STATUS,
+            type: ShopActions.SET_ORDER_FORM_STATUS,
             payload: response.status
           };
         });
     });
 
   constructor(private action$: Actions,
-              private httpClient: HttpClient) {}
+              private httpClient: HttpClient,
+              private toasterService: ToasterService) {}
 }

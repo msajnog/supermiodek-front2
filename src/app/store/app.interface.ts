@@ -1,7 +1,7 @@
 import { Product } from '../core/product/product.interface';
 import { ContactData } from '../core/footer/footer.interface';
 import { Photo } from '../home/home.interface';
-import { ShipmentMethod } from '../shop/shop.interface';
+import { Order, ShipmentMethod } from '../shop/shop.interface';
 
 export interface AppState {
   home: {
@@ -10,6 +10,8 @@ export interface AppState {
   };
   shop: {
     shipmentMethods: ShipmentMethod[];
+    orderData: Order
+    orderDataSend: boolean;
   };
   footer: {
     contactData: ContactData;

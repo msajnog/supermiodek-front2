@@ -4,10 +4,11 @@ label.form-control-label {
   font-size: 1.5rem;
   font-weight: bold;
 
-  em {
-    color: $red-main;
-    font-style: normal;
-  }
+}
+
+em {
+  color: $red-main;
+  font-style: normal;
 }
 
 .form-control {

@@ -9,6 +9,8 @@ import * as fromApp from '../store/app.interface';
 import * as ProductActions from '../home/store/home.actions';
 import * as ShopActions from './store/shop.actions';
 import { ShipmentMethod } from './shop.interface';
+import { Observable } from 'rxjs/Observable';
+import * as FooterActions from '../core/footer/store/footer.actions';
 
 @Component({
   selector: 'app-shop',
@@ -24,6 +26,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   productsTotal = 0;
   total = 0;
   productsOrdered = false;
+  orderFormSend: Observable<boolean> = this.store.select('shop', 'orderDataSend');
 
   constructor(private store: Store<fromApp.AppState>,
               private modalService: NgbModal) { }
@@ -71,14 +74,16 @@ export class ShopComponent implements OnInit, OnDestroy {
         );
       });
     }
-    this.orderForm = new FormGroup({
-      'name': new FormControl(null, [Validators.required]),
-      'surname': new FormControl(null, [Validators.required]),
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'phone': new FormControl(null, [Validators.pattern('\\d+'), Validators.minLength(9)]),
-      'shipping': new FormControl(null, [Validators.required]),
-      'comment': new FormControl(),
 
+    this.orderForm = new FormGroup({
+      'client': new FormGroup({
+        'name': new FormControl(null, [Validators.required]),
+        'surname': new FormControl(null, [Validators.required]),
+        'email': new FormControl(null, [Validators.required, Validators.email]),
+        'phone': new FormControl(null, [Validators.pattern('\\d+'), Validators.minLength(9)]),
+        'shipment': new FormControl(null, [Validators.required]),
+        'comment': new FormControl(),
+      }),
       'products': productsGroup
     });
   }
@@ -145,11 +150,21 @@ export class ShopComponent implements OnInit, OnDestroy {
     this.total = (this.productsTotal + method.price).toFixed(2);
   }
 
-  onSubmit() {
+  onSubmit(closeModalFn) {
     const order = Object.assign({}, this.orderForm.value);
     [order.shipment] = this.shipmentMethods.filter(method => method._id === order.shipment);
     order.productsTotal = this.productsTotal;
     order.total = this.total;
     this.store.dispatch(new ShopActions.PlaceOrder(order));
+
+    this.orderFormSend.subscribe((value) => {
+      if (value) {
+        this.orderForm.reset();
+        closeModalFn();
+        this.store.dispatch(new ProductActions.FetchProducts());
+        this.calculateTotal();
+        this.store.dispatch(new ShopActions.SetOrderFormStatus(false));
+      }
+    });
   }
 }
