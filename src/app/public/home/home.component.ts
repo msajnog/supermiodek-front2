@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { Photo } from './home.interface';
-import * as fromApp from '../store/app.interface';
+import * as fromApp from '../../store/app.interface';
 import * as ProductActions from './store/home.actions';
 import { Product } from '../core/product/product.interface';
 

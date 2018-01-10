@@ -5,12 +5,11 @@ import { Subscription } from 'rxjs/Subscription';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Product } from '../core/product/product.interface';
-import * as fromApp from '../store/app.interface';
+import * as fromApp from '../../store/app.interface';
 import * as ProductActions from '../home/store/home.actions';
 import * as ShopActions from './store/shop.actions';
 import { ShipmentMethod } from './shop.interface';
 import { Observable } from 'rxjs/Observable';
-import * as FooterActions from '../core/footer/store/footer.actions';
 
 @Component({
   selector: 'app-shop',

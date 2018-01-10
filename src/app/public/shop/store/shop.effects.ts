@@ -6,7 +6,6 @@ import * as ShopActions from './shop.actions';
 import { ShipmentMethodResponse } from '../shop.interface';
 import { Observable } from 'rxjs/Observable';
 import { ContactDataResponse } from '../../core/footer/footer.interface';
-import * as FooterActions from '../../core/footer/store/footer.actions';
 import { Toast, ToasterService } from 'angular2-toaster';
 
 @Injectable()

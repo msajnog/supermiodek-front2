@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { ToasterService, Toast } from 'angular2-toaster';
 
-import * as fromApp from '../../store/app.interface';
+import * as fromApp from '../../../store/app.interface';
 import * as FooterActions from './store/footer.actions';
 
 @Component({

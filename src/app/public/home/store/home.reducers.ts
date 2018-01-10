@@ -1,5 +1,5 @@
 import * as ProductActions from './home.actions';
-import { appInitialState } from '../../store/store-init-state';
+import { appInitialState } from '../../../store/store-init-state';
 
 export function homeReducer(state = appInitialState.home, action: ProductActions.ProductActions) {
   switch (action.type) {

@@ -1,6 +1,5 @@
 import * as ShopActions from './shop.actions';
-import { appInitialState } from '../../store/store-init-state';
-import * as FooterActions from '../../core/footer/store/footer.actions';
+import { appInitialState } from '../../../store/store-init-state';
 
 export function shopReducer(state = appInitialState.shop, action: ShopActions.ShopActions) {
   switch (action.type) {

@@ -1,8 +1,8 @@
-@import "../../styles/variables";
-@import "../../styles/helpers";
-@import "~bootstrap/scss/mixins/breakpoints";
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@import "../../../styles/variables";
+@import "../../../styles/helpers";
+@import "../../../../node_modules/bootstrap/scss/mixins/breakpoints";
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
 
 h1, h4 {
   font-family: $font-family-secondary;

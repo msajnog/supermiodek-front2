@@ -1,7 +1,7 @@
-import { Product } from '../core/product/product.interface';
-import { ContactData } from '../core/footer/footer.interface';
-import { Photo } from '../home/home.interface';
-import { Order, ShipmentMethod } from '../shop/shop.interface';
+import { Product } from '../public/core/product/product.interface';
+import { ContactData } from '../public/core/footer/footer.interface';
+import { Photo } from '../public/home/home.interface';
+import { Order, ShipmentMethod } from '../public/shop/shop.interface';
 
 export interface AppState {
   home: {

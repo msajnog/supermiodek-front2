@@ -1,5 +1,5 @@
 import * as FooterActions from './footer.actions';
-import { appInitialState } from '../../../store/store-init-state';
+import { appInitialState } from '../../../../store/store-init-state';
 
 export function footerReducer(state = appInitialState.footer, action: FooterActions.FooterActions) {
   switch (action.type) {
