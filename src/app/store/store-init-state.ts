@@ -4,6 +4,10 @@ import { Photo } from '../public/home/home.interface';
 import { ShipmentMethod } from '../public/shop/shop.interface';
 
 export const appInitialState = {
+  auth: {
+    authenticated: false,
+    token: null
+  },
   home: {
     galleryPhotos: <Photo[]>[
       {

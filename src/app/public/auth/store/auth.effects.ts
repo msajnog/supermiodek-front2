@@ -8,10 +8,10 @@ import { Toast, ToasterService } from 'angular2-toaster';
 
 @Injectable()
 export class AuthEffects {
-  @Effect({dispatch: false})
+  @Effect()
   signIn = this.action$
     .ofType(AuthActions.SIGN_IN)
-    .switchMap((action: AuthActions.SignIn) => {
+    .mergeMap((action: AuthActions.SignIn) => {
       return this.httpClient.post('/api/authenticate', action.payload)
         .do((response: any) => {
           if (!response.status) {
@@ -21,12 +21,19 @@ export class AuthEffects {
             };
             this.toasterService.pop(toast);
           }
-
           return response;
         })
         .catch((error: HttpErrorResponse) => {
           return Observable.empty();
         });
+    })
+    .map((response) => {
+      if (response.status) {
+        return {
+          type: AuthActions.SET_AUTH,
+          payload: { authenticated: response.status, token: response.token }
+        };
+      }
     });
 
   constructor (private action$: Actions,

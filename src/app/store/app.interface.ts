@@ -4,6 +4,10 @@ import { Photo } from '../public/home/home.interface';
 import { Order, ShipmentMethod } from '../public/shop/shop.interface';
 
 export interface AppState {
+  auth: {
+    authenticated: boolean;
+    token: string;
+  };
   home: {
     galleryPhotos: Photo[];
     products: Product[];
