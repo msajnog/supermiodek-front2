@@ -27,7 +27,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authorization = this.store.select('auth').subscribe(auth => {
       if (auth.authenticated) {
-        this.router.navigate(['admin']);
+        this.router.navigate(['/admin']);
       }
     });
   }

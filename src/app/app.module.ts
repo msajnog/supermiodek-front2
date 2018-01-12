@@ -16,14 +16,12 @@ import { rootReducer } from './store/app.reducers';
 import { ProductEffects } from './public/home/store/home.effects';
 import { ShopEffects } from './public/shop/store/shop.effects';
 import { PublicModule } from './public/public.module';
-import { OrdersComponent } from './admin/orders/orders.component';
 import { AdminModule } from './admin/admin.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrdersComponent,
   ],
   imports: [
     BrowserModule,
