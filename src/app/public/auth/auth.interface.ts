@@ -6,4 +6,5 @@ export interface User {
 export interface AuthState {
   authenticated: boolean;
   token: string;
+  expires: number;
 }

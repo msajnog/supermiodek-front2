@@ -13,8 +13,8 @@ const appRoutes: Routes = [
   {
     path: 'admin', component: AdminAppComponent, canActivate: [AdminGuard], children:
       [
-        {path: '', redirectTo: 'orders', pathMatch: 'full'},
-        {path: 'orders', component: OrdersComponent}
+        {path: '', redirectTo: 'zamowienia', pathMatch: 'full'},
+        {path: 'zamowienia', component: OrdersComponent}
       ]
   },
   {

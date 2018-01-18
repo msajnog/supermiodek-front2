@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from '../../store/app.interface';
 
 @Component({
   selector: 'app-app',
@@ -7,9 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminAppComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<fromApp.AppState>) { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

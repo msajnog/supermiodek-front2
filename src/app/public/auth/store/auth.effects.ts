@@ -31,7 +31,7 @@ export class AuthEffects {
       if (response.status) {
         return {
           type: AuthActions.SET_AUTH,
-          payload: { authenticated: response.status, token: response.token }
+          payload: { authenticated: response.status, token: response.token, expires: response.expires }
         };
       }
     });

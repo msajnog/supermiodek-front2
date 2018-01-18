@@ -8,7 +8,8 @@ export function authReducer(state = appInitialState.auth, action: AuthActions.Au
       return {
         ...state,
         authenticated: action.payload.authenticated,
-        token: action.payload.token
+        token: action.payload.token,
+        expires: action.payload.expires
       };
     }
     default: {
