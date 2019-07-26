@@ -1,7 +1,50 @@
-<app-carousel></app-carousel>
+<!--<app-carousel></app-carousel>-->
 
 <div class="container">
   <form [formGroup]="orderForm"  (ngSubmit)="onSubmit()" id="orderForm" novalidate>
+    <div class="row">
+      <div class="col-12">
+        <h1 class="red">Wybierz produkty</h1>
+        <div class="row justify-content-center"
+             formArrayName="products">
+          <ng-container *ngFor="let productControl of getControls(); let i = index;">
+            <div class="col-xs-12 col-sm-6 col-md-3 product-item"
+                 *ngIf="productControl.get('availability').value"
+                 [formGroupName]="i">
+              <a href="#" class="img"><img [src]="productControl.get('image').value" alt="{{ productControl.get('name').value }}" /></a>
+              <a href="#" class="name">{{ productControl.get('name').value }}</a>
+              <div class="short-desc">{{ productControl.get('shortDescription').value }}</div>
+
+              <p class="availability">Dostępność: {{ productControl.get('availability').value }} szt.</p>
+              <div class="row justify-content-between align-items-center no-gutters">
+                <div class="price">{{ productControl.get('price').value | formatPrice }} zł</div>
+                <div class="quantity">
+                  <button type="button"
+                          (click)="decrease(i)">
+                    <fa name="minus"
+                        size="1x"></fa>
+                  </button>
+                  <input type="number"
+                         (change)="calculateTotal()"
+                         min="0"
+                         max="{{ productControl.get('availability').value }}"
+                         name="quantity"
+                         value="0"
+                         class="form-control"
+                         formControlName="quantity">
+                  <button type="button"
+                          (click)="increase(i)">
+                    <fa name="plus"
+                        size="1x"></fa>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
     <div formGroupName="client" class="row">
       <div class="col-xs-12 col-sm-6">
         <div class="form-group">
@@ -95,53 +138,12 @@
                     placeholder="Komentarz"></textarea>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <h1 class="red">Wybierz produkty</h1>
-        <div class="row justify-content-center"
-             formArrayName="products">
-          <ng-container *ngFor="let productControl of getControls(); let i = index;">
-            <div class="col-xs-12 col-sm-6 col-md-3 product-item"
-                 *ngIf="productControl.get('availability').value"
-                 [formGroupName]="i">
-              <a href="#" class="img"><img [src]="productControl.get('image').value" alt="{{ productControl.get('name').value }}" /></a>
-              <a href="#" class="name">{{ productControl.get('name').value }}</a>
-              <div class="short-desc">{{ productControl.get('shortDescription').value }}</div>
-
-              <p class="availability">Dostępność: {{ productControl.get('availability').value }} szt.</p>
-              <div class="row justify-content-between align-items-center no-gutters">
-                <div class="price">{{ productControl.get('price').value | formatPrice }} zł</div>
-                <div class="quantity">
-                  <button type="button"
-                          (click)="decrease(i)">
-                    <fa name="minus"
-                        size="1x"></fa>
-                  </button>
-                  <input type="number"
-                         (change)="calculateTotal()"
-                         min="0"
-                         max="{{ productControl.get('availability').value }}"
-                         name="quantity"
-                         value="0"
-                         class="form-control"
-                         formControlName="quantity">
-                  <button type="button"
-                          (click)="increase(i)">
-                    <fa name="plus"
-                        size="1x"></fa>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </ng-container>
-        </div>
-      </div>
 
       <div class="col-12">
         <p class="total">Wartość produktów: <b>{{ productsTotal | formatPrice }} zł</b></p>
       </div>
     </div>
+
     <div class="row justify-content-center">
       <button type="button"
               [disabled]="!orderForm.valid || !productsOrdered"
@@ -188,7 +190,7 @@
                   <td>{{ product.name }}</td>
                   <td>{{ product.quantity }}</td>
                   <td>{{ product.price | formatPrice }} zł</td>
-                  <td>{{ (product.price * product.quantity).toFixed(2) | formatPrice }} zł</td>
+                  <td>{{ product.price * product.quantity | formatPrice }} zł</td>
                 </tr>
               </tbody>
               <tfoot>

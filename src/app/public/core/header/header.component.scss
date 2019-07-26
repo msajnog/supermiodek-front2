@@ -1,24 +1,42 @@
 @import "../../../../styles/_helpers";
+@import "../../../../styles/variables";
 
 nav.nav-custom-class {
   padding: 0;
+
+  .navbar-brand {
+    height: auto;
+    font-size: 2.0rem;
+    color: #fff;
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    img {
+      display: inline-block;
+      max-width: 50px;
+      margin-right: 10px;
+    }
+  }
 
   .navbar-collapse {
     flex-grow: unset;
 
     ul {
       li {
+        @extend .transition;
+
         a {
           line-height: 70px;
           padding: 0 20px;
           font-size: 2.4rem;
           color: #fff;
           text-transform: uppercase;
-          @extend .transition;
+          cursor: pointer;
+        }
 
-          &:hover {
-            color: #222222;
-          }
+        &:hover {
+          background-color: $blue;
         }
       }
     }

@@ -5,7 +5,12 @@
 #orderForm {
   margin: 30px 0;
 
-  .product-item {  text-align: center;
+  input.form-control, textarea {
+    font-size: 1.4rem;
+  }
+
+  .product-item {
+    text-align: center;
     margin-bottom: 30px;
     padding-bottom: $grid-gutter-width / 2;
     border: 1px solid transparent;
@@ -79,6 +84,15 @@
 
       &:last-of-type {
         border-bottom: 0;
+      }
+
+      .custom-control-label {
+        padding-left: 8px;
+        margin-left: 0;
+
+        &:before, &:after {
+          top: 0.40rem;
+        }
       }
 
       .total {

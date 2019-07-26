@@ -149,7 +149,7 @@ export class ShopComponent implements OnInit, OnDestroy {
     this.total = (this.productsTotal + method.price).toFixed(2);
   }
 
-  onSubmit(closeModalFn) {
+  onSubmit(closeModalFn?) {
     const order = Object.assign({}, this.orderForm.value);
     [order.shipment] = this.shipmentMethods.filter(method => method._id === order.shipment);
     order.productsTotal = this.productsTotal;

@@ -10,6 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { FooterEffects } from './footer/store/footer.effects';
 import { ToasterModule } from 'angular2-toaster';
 import { RouterModule } from '@angular/router';
+import { ScrollToModule } from 'ng2-scroll-to-el';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     ToasterModule,
     RouterModule,
-    EffectsModule.forFeature([FooterEffects])
+    EffectsModule.forFeature([FooterEffects]),
+    ScrollToModule.forRoot()
   ],
   exports: [
     HeaderComponent,

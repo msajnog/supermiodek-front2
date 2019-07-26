@@ -4,11 +4,11 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'formatPrice'
 })
 export class FormatPrice implements PipeTransform {
-  transform(price: string): string {
+  transform(price: number): string {
     let formattedPrice = '';
-    price = price.toString();
-    if (price.indexOf('.') > -1) {
-      formattedPrice = price.replace('.', ',');
+
+    if (String(price).indexOf('.') > -1) {
+      formattedPrice = String(price).replace('.', ',');
     } else {
       formattedPrice = price + ',00';
     }
