@@ -1,6 +1,6 @@
 import { Product } from '../public/core/product/product.interface';
 import { ContactData } from '../public/core/footer/footer.interface';
-import { Photo } from '../public/home/home.interface';
+import { Photo, Temperature } from '../public/home/home.interface';
 import { ShipmentMethod } from '../public/shop/shop.interface';
 
 export const appInitialState = {
@@ -35,7 +35,8 @@ export const appInitialState = {
         photoUrl: 'assets/images/gallery_img6.jpg'
       },
     ],
-    products: <Product[]>[]
+    products: <Product[]>[],
+    temperatures: <Temperature[]>[]
   },
   shop: {
     shipmentMethods: <ShipmentMethod[]>[],

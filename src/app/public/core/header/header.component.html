@@ -7,10 +7,16 @@
 
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active"><a class="nav-link" [scrollTo]="'#productsSection'" [scrollOffset]="-70">Produkty</a></li>
+        <li class="nav-item active">
+          <a *ngIf="router.isActive('/', true); else productsPage" class="nav-link" (click)="scrollToSection('products')">Produkty</a>
+          <ng-template #productsPage><a *ngIf="!router.isActive('/', true)" [routerLink]="['/']" fragment="products" class="nav-link">Produkty</a></ng-template>
+        </li>
         <li class="nav-item"><a [routerLink]="['/sklep']" class="nav-link">Sklep</a></li>
-        <li class="nav-item"><a class="nav-link" scrollTo [scrollTo]="'#gallerySection'" [scrollOffset]="-70">Galeria</a></li>
-        <li class="nav-item"><a class="nav-link" [scrollTo]="'#footerSection'">Kontakt</a></li>
+        <li class="nav-item">
+          <a *ngIf="router.isActive('/', true); else galleryPage" class="nav-link" (click)="scrollToSection('gallery')">Galeria</a>
+          <ng-template #galleryPage><a *ngIf="!router.isActive('/', true)" [routerLink]="['/']" fragment="gallery" class="nav-link">Galeria</a></ng-template>
+        </li>
+        <li class="nav-item"><a class="nav-link" [scrollTo]="'#footerSection'" [scrollOffset]="-70">Kontakt</a></li>
       </ul>
     </div>
   </div>

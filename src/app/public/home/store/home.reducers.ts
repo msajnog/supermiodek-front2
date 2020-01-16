@@ -9,6 +9,12 @@ export function homeReducer(state = appInitialState.home, action: ProductActions
         products: [...action.payload]
       };
     }
+    case ProductActions.SET_TEMPERATURES: {
+      return {
+        ...state,
+        temperatures: [...action.payload]
+      };
+    }
     default: {
       return state;
     }

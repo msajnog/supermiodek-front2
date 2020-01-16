@@ -1,5 +1,29 @@
 <app-carousel></app-carousel>
 
+<section class="temperature-chart">
+  <div class="container">
+    <h1>Wykres</h1>
+    <div class="row">
+      <div class="col-12">
+        <ngx-charts-heat-map
+          class="chart-container"
+          [results]="temperatures"
+          [min]="minTemp"
+          [max]="maxTemp"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [tooltipDisabled]="false"
+          [scheme]="'vivid'"
+          [view]="view"
+        ></ngx-charts-heat-map>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="welcome bg-beige-main">
   <div class="container">
     <h1>Nagłówek</h1>
@@ -123,8 +147,9 @@
   <ng-template #content let-close="close">
     <fa name="times" size="3x" class="cross-close" (click)="close()"></fa>
     <div class="modal-body">
+      <fa (click)="goToImage('prev')" name="angle-left" class="arrow left" size="5x"></fa>
       <img [src]="modalPhoto.photoUrl" alt="">
+      <fa (click)="goToImage('next')" name="angle-right" class="arrow right" size="5x"></fa>
     </div>
   </ng-template>
 </section>
-

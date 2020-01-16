@@ -29,6 +29,12 @@ section {
     padding-bottom: 0;
   }
 
+  &.temperature-chart {
+    .ngx-charts-outer {
+      margin: auto;
+    }
+  }
+
   &.welcome {
     h2 {
       font-family: $font-family-secondary;
@@ -189,3 +195,29 @@ section {
   }
 }
 
+.modal-dialog {
+  .modal-body {
+    .arrow {
+      position: absolute;
+      top: calc(50% - 75px);
+      padding: 0 30px;
+      font-size: 3em;
+      color: #fff;
+      cursor: pointer;
+      opacity: 0.6;
+      @extend .transition;
+
+      &.left {
+        left: -110px;
+      }
+
+      &.right {
+        right: -110px;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

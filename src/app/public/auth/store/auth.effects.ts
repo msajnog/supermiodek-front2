@@ -13,16 +13,7 @@ export class AuthEffects {
     .ofType(AuthActions.SIGN_IN)
     .mergeMap((action: AuthActions.SignIn) => {
       return this.httpClient.post('/api/authenticate', action.payload)
-        .do((response: any) => {
-          if (!response.status) {
-            const toast: Toast = {
-              type: 'error',
-              title: response.msg,
-            };
-            this.toasterService.pop(toast);
-          }
-          return response;
-        })
+        .do((response: any) => response)
         .catch((error: HttpErrorResponse) => {
           return Observable.empty();
         });
@@ -32,6 +23,17 @@ export class AuthEffects {
         return {
           type: AuthActions.SET_AUTH,
           payload: { authenticated: response.status, token: response.token, expires: response.expires }
+        };
+      } else {
+        const toast: Toast = {
+          type: 'error',
+          title: response.msg,
+        };
+        this.toasterService.pop(toast);
+
+        return {
+          type: AuthActions.SET_AUTH,
+          payload: { authenticated: false, token: null, expires: null }
         };
       }
     });

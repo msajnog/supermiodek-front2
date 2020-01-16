@@ -1,6 +1,6 @@
 import { Product } from '../public/core/product/product.interface';
 import { ContactData } from '../public/core/footer/footer.interface';
-import { Photo } from '../public/home/home.interface';
+import {Photo, Temperature} from '../public/home/home.interface';
 import { Order, ShipmentMethod } from '../public/shop/shop.interface';
 
 export interface AppState {
@@ -11,6 +11,7 @@ export interface AppState {
   home: {
     galleryPhotos: Photo[];
     products: Product[];
+    temperatures: Temperature[];
   };
   shop: {
     shipmentMethods: ShipmentMethod[];

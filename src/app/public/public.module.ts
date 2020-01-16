@@ -13,6 +13,7 @@ import { CheckQuantity } from './shop/checkQuantity.pipe';
 import { AuthComponent } from './auth/auth.component';
 import { AuthEffects } from './auth/store/auth.effects';
 import { PublicAppComponent } from './public-app/public-app.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -23,14 +24,15 @@ import { PublicAppComponent } from './public-app/public-app.component';
     AuthComponent,
     PublicAppComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    AngularFontAwesomeModule,
-    ReactiveFormsModule,
-    CoreModule,
-    EffectsModule.forFeature([AuthEffects])
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        AngularFontAwesomeModule,
+        ReactiveFormsModule,
+        CoreModule,
+        EffectsModule.forFeature([AuthEffects]),
+        NgxChartsModule
+    ],
   exports: [
     HomeComponent,
     ShopComponent,
